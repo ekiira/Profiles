@@ -1,0 +1,42 @@
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    overflow: scroll;
+    padding: 10px 0;
+    width: 100%;
+  }
+  
+  .pagination li {
+    display: inline-block;
+  }
+  
+  .page-link {
+    color: #304163;
+    font-size: 12px;
+    padding: 5px 10px;
+    margin: 0 3px;
+    border: 1px solid #0000003b;
+    border-radius: 4px;
+  }
+  
+  .page-link:focus {
+    outline: none;
+  }
+  
+  .active-page a {
+    color: #ffffff;
+    background-color: #304163;
+  }
+  
+  .page-link:hover,
+  .page-link:focus {
+    color: #ffffff;
+    background-color: #304163;
+  }
+  
+  @media (max-width: 767px) {
+    .pagination {
+      justify-content: inherit;
+    }
+  }
+  
