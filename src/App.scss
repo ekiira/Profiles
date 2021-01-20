@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 .App {
   font-family: "Poppins";
+  color: #1d253b;
 }
 img {
   width: 20px;
@@ -32,10 +33,13 @@ dd {
 
 .modal {
   font-family: 'Poppins' !important;
+  color: #1d253b;
+
 }
 
 h4 {
   border-bottom: 1px solid #dee2e6;
   margin-bottom: 10px 0;
   padding: 5px 0;
+
 }
