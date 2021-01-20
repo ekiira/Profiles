@@ -7,7 +7,7 @@ import './loader.scss';
 const PageLoader = () => {
   return (
     <div className="loader-wrapper">
-      <Loader type="Oval" color="#c70039" height={40} width={40} />
+      <Loader type="Oval" color="#304163" height={40} width={40} />
     </div>
   );
 }

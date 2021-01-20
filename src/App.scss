@@ -1,2 +1,41 @@
 @import "~bootstrap/scss/bootstrap";
+.App {
+  font-family: "Poppins";
+}
+img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
 
+.btn-primary {
+  background: none;
+  border: none;
+  padding: 5px;
+  vertical-align: middle;
+
+  &:focus,
+  &:hover,
+  &:active {
+    background: none !important;
+    box-shadow: 0 0 0 0.2rem rgba(194, 219, 245, 0.5) !important;
+  }
+}
+
+dl {
+  margin-bottom: 0;
+}
+
+dd {
+  width: 100%;
+}
+
+.modal {
+  font-family: 'Poppins' !important;
+}
+
+h4 {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 10px 0;
+  padding: 5px 0;
+}

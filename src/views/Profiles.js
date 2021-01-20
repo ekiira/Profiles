@@ -4,6 +4,7 @@ import Pagination from "../components/Pagination";
 import Card from "react-bootstrap/Card";
 
 import Table from "../components/Table/";
+import Profile from "./Profile";
 
 const Profiles = () => {
   const [profiles, setProfiles] = useState(null);
@@ -15,18 +16,15 @@ const Profiles = () => {
         `https://api.enye.tech/v1/challenge/records`
       );
       const data = await response.json();
-      console.log(data);
 
       if (data.status === "success") {
         setProfiles(data.records.profiles);
-      } else {
-        console.log("error");
       }
     };
     getProfiles();
   }, []);
 
-  const itemsPerPage = 10;
+  const itemsPerPage = 20;
   const indexofLastPost = page * itemsPerPage;
   const indexofFirstPost = indexofLastPost - itemsPerPage;
   const currentPost = profiles
@@ -48,19 +46,29 @@ const Profiles = () => {
     }
   }, [profiles]);
 
+  const [show, setShow] = useState(false);
+  const [profile, setProfile] = useState(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (profile) => {
+    setShow(true);
+    setProfile(profile);
+  };
+
   return (
     <div>
       <Container fluid>
-      <h2 className='text-center py-4'>ShopHere</h2>
-      <h4 className='text-center py-4'>Transactions Records</h4>
+        <h1 className="text-center pt-4 pb-3">ShopHere</h1>
+        <h3 className="text-center py-4">Transactions Records</h3>
         <Card className="mb-5">
           <Card.Header>
             <Card.Title className="mb-0">Profiles</Card.Title>
           </Card.Header>
           <Card.Body>
-            <Table data={currentPost} />
+            <Table data={currentPost} handleShow={handleShow} />
 
             <Pagination pageCount={Number(pn)} onChange={handlePageChange} />
+            <Profile show={show} handleClose={handleClose} profile={profile} />
           </Card.Body>
         </Card>
       </Container>

@@ -1,15 +1,13 @@
-import './App.scss';
+import "./App.scss";
 
-import Profiles from './views/Profiles'
+import Profiles from "./views/Profiles";
 
 const App = () => {
   return (
     <div className="App ">
-    
-    <Profiles/>
-
+      <Profiles />
     </div>
   );
-}
+};
 
 export default App;

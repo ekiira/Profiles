@@ -6,7 +6,7 @@ import "./table.scss";
 
 import Loader from "../Loader";
 
-const ProfileTable = ({ data }) => {
+const ProfileTable = ({ data, handleShow }) => {
   return (
     <>
       {data ? (
@@ -38,7 +38,13 @@ const ProfileTable = ({ data }) => {
                   <td>{data.PaymentMethod}</td>
 
                   <td>
-                    <Button className='view-btn ' variant="link">View</Button>
+                    <Button
+                      className="view-btn "
+                      variant="link"
+                      onClick={() => handleShow(data)}
+                    >
+                      View
+                    </Button>
                   </td>
                 </tr>
               ))}
