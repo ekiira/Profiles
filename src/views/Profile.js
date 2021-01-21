@@ -6,7 +6,6 @@ import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 
 const Profile = ({ handleClose, show, profile }) => {
-  console.log("pro", profile);
   return (
     <div className="">
       {profile ? (

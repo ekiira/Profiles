@@ -12,7 +12,7 @@ const Pagination = ({ pageCount, onChange }) => {
       breakClassName={"break-me"}
       activeClassName={"active-page"}
       containerClassName={"pagination"}
-      pageCount={50}
+      pageCount={pageCount}
       marginPagesDisplayed={2}
       pageRangeDisplayed={3}
       onPageChange={onChange}
