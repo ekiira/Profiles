@@ -8,6 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 
 import Table from "../components/Table/";
 import Profile from "./Profile";
@@ -21,7 +22,7 @@ const Profiles = () => {
   const [filterPayment, setFilterPayment] = useState("");
   const [filterGender, setFilterGender] = useState("");
   const [filteredProfiles, setFilteredProfiles] = useState(null);
-
+  const [showAlert, setShowAlert] = useState(false);
   // fetch profiles api
   useEffect(() => {
     const getProfiles = async () => {
@@ -41,6 +42,7 @@ const Profiles = () => {
     setSearchName("");
     setFilterPayment("");
     setFilterGender("");
+    setFilteredProfiles(null);
   };
 
   const onNameSearch = () => {
@@ -56,33 +58,73 @@ const Profiles = () => {
             )
         )
       );
+    } else {
+      setShowAlert(true);
     }
   };
 
-  // pagination
+  useEffect(() => {
+    if (filterGender || filterPayment) {
+      setFilteredProfiles(
+        profiles.filter(
+          (profile) =>
+            profile.Gender.toLowerCase() ===
+              filterGender.toLowerCase().trim() ||
+            profile.PaymentMethod.toLowerCase() ===
+              filterPayment.toLowerCase().trim()
+        )
+      );
+    }
+    if (filterGender && filterPayment) {
+      setFilteredProfiles(
+        profiles.filter(
+          (profile) =>
+            profile.Gender.toLowerCase() ===
+              filterGender.toLowerCase().trim() &&
+            profile.PaymentMethod.toLowerCase() ===
+              filterPayment.toLowerCase().trim()
+        )
+      );
+    } 
+  }, [filterGender, profiles, filterPayment]);
+
+  const [currentPost, setCurrentPost] = useState(null);
+
   const itemsPerPage = 20;
   const indexofLastPost = page * itemsPerPage;
   const indexofFirstPost = indexofLastPost - itemsPerPage;
-  const currentPost = profiles
-    ? profiles.slice(indexofFirstPost, indexofLastPost)
-    : null;
   const [pn, setPn] = useState("");
+
+  useEffect(() => {
+    if (profiles && Array.isArray(filteredProfiles)) {
+      if (filteredProfiles.length > 0) {
+        for (
+          let i = 1;
+          i <= Math.ceil(filteredProfiles.length / itemsPerPage);
+          i++
+        ) {
+          setPn(i);
+        }
+        setCurrentPost(
+          filteredProfiles.slice(indexofFirstPost, indexofLastPost)
+        );
+      } else {
+        setCurrentPost([]);
+      }
+    }
+    if (profiles && !filteredProfiles) {
+      for (let i = 1; i <= Math.ceil(profiles.length / itemsPerPage); i++) {
+        setPn(i);
+      }
+      setCurrentPost(profiles.slice(indexofFirstPost, indexofLastPost));
+    }
+  }, [profiles, filteredProfiles, indexofLastPost, indexofFirstPost]);
 
   const handlePageChange = (event) => {
     if (event.selected >= 0 && event.selected <= pn) {
       setPage(event.selected + 1);
     }
   };
-
-  useEffect(() => {
-    if (profiles) {
-      for (let i = 1; i <= Math.ceil(profiles.length / itemsPerPage); i++) {
-        setPn(i);
-      }
-    }
-  }, [profiles]);
-
-  // end of pagination
 
   // modal
   const handleClose = () => setShow(false);
@@ -94,6 +136,16 @@ const Profiles = () => {
 
   return (
     <div>
+      {showAlert ? (
+        <Alert
+          variant="danger"
+          dismissible={true}
+          onClose={() => setShowAlert(false)}
+          className="text-center font-weight-bold"
+        >
+          Please enter a name to search
+        </Alert>
+      ) : null}
       <Container fluid>
         <h1 className="text-center pt-4 pb-3">ShopHere</h1>
         <h3 className="text-center py-4">Transactions Records</h3>
@@ -113,7 +165,7 @@ const Profiles = () => {
               </p>
             </div>
             <Row>
-              <Col lg={4} className='pb-2 pb-lg-0'>
+              <Col lg={4} className="pb-2 pb-lg-0">
                 <InputGroup className="mb-3">
                   <FormControl
                     placeholder="name"
@@ -130,7 +182,7 @@ const Profiles = () => {
 
               <Col lg={8}>
                 <Row>
-                  <Col lg={6} className='pb-4 pb-lg-0'>
+                  <Col lg={6} className="pb-4 pb-lg-0">
                     <InputGroup>
                       <p className="filter-title"> Payment Method</p>
 
@@ -142,7 +194,6 @@ const Profiles = () => {
                         onChange={(e) => setFilterPayment(e.target.value)}
                       >
                         <option></option>
-
                         <option>money order</option>
                         <option>cc</option>
                         <option>paypal</option>
@@ -151,7 +202,7 @@ const Profiles = () => {
                     </InputGroup>
                   </Col>
 
-                  <Col lg={6} className='pb-4 pb-lg-0'>
+                  <Col lg={6} className="pb-4 pb-lg-0">
                     <InputGroup>
                       <p className="filter-title">Gender</p>
 
@@ -162,7 +213,7 @@ const Profiles = () => {
                         value={filterGender}
                         onChange={(e) => setFilterGender(e.target.value)}
                       >
-                        <option></option>
+                        <option ></option>
                         <option>Male</option>
                         <option>Female</option>
                         <option>Prefer to skip</option>

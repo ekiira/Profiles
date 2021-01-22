@@ -6,11 +6,11 @@ import "./table.scss";
 
 import Loader from "../Loader";
 
-const ProfileTable = ({ data, handleShow }) => {
+const ProfileTable = ({ data, handleShow,}) => {
   return (
     <>
       {data ? (
-        data.length > 0 ? (
+        data.length ? (
           <Table responsive>
             <thead>
               <tr>

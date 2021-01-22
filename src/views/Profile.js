@@ -23,7 +23,7 @@ const Profile = ({ handleClose, show, profile }) => {
           <Modal.Body>
             <Container>
               <Row>
-                <Col md={6}>
+                <Col xs={12} lg={6} className='pb-4'>
                   <Card className="p-3">
                     <h4>Personal Information</h4>
                     <dl>
@@ -36,7 +36,7 @@ const Profile = ({ handleClose, show, profile }) => {
                     </dl>
                   </Card>
                 </Col>
-                <Col md={6}>
+                <Col xs={12} lg={6}>
                   <Card className="p-3">
                     <h4>Payment Information</h4>
                     <dl>
@@ -51,7 +51,7 @@ const Profile = ({ handleClose, show, profile }) => {
                 </Col>
               </Row>
 
-              <Row className="pt-5">
+              <Row className="pt-4">
                 <Col xs={12}>
                   <Card className="p-3">
                     <h4>Device Information</h4>
@@ -65,7 +65,7 @@ const Profile = ({ handleClose, show, profile }) => {
                 </Col>
               </Row>
 
-              <Row className="pt-5">
+              <Row className="pt-4">
                 <Col xs={12}>
                   <Card className="p-3">
                     <h4>Contact Information</h4>
