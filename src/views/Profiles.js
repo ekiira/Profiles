@@ -141,7 +141,7 @@ const Profiles = () => {
           variant="danger"
           dismissible={true}
           onClose={() => setShowAlert(false)}
-          className="text-center font-weight-bold"
+          className="text-center font-weight-bold alert"
         >
           Please enter a name to search
         </Alert>

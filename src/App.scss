@@ -2,6 +2,7 @@
 .App {
   font-family: "Poppins";
   color: #1d253b;
+  position: relative;
 }
 img {
   width: 20px;
@@ -78,3 +79,22 @@ h4 {
     box-shadow: none;
   }
 }
+
+.alert {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  animation-name: slideInDown;
+  animation-duration: 500ms;
+  animation-fill-mode: both;
+}
+
+@keyframes slideInDown {
+  0% {
+  transform: translateY(-100%);
+  visibility: visible;
+  }
+  100% {
+  transform: translateY(0);
+  }
+  } 
