@@ -50,10 +50,10 @@ const Profiles = () => {
       setFilteredProfiles(
         profiles.filter(
           (profile) =>
-            profile.FirstName.toLowerCase().includes(
+            profile.FirstName.toLowerCase().startsWith(
               searchName.toLowerCase().trim()
             ) ||
-            profile.LastName.toLowerCase().includes(
+            profile.LastName.toLowerCase().startsWith(
               searchName.toLowerCase().trim()
             )
         )
@@ -74,6 +74,7 @@ const Profiles = () => {
               filterPayment.toLowerCase().trim()
         )
       );
+      setSearchName("");
     }
     if (filterGender && filterPayment) {
       setFilteredProfiles(
@@ -85,7 +86,8 @@ const Profiles = () => {
               filterPayment.toLowerCase().trim()
         )
       );
-    } 
+      setSearchName("");
+    }
   }, [filterGender, profiles, filterPayment]);
 
   const [currentPost, setCurrentPost] = useState(null);
@@ -213,7 +215,7 @@ const Profiles = () => {
                         value={filterGender}
                         onChange={(e) => setFilterGender(e.target.value)}
                       >
-                        <option ></option>
+                        <option></option>
                         <option>Male</option>
                         <option>Female</option>
                         <option>Prefer to skip</option>
